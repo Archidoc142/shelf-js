@@ -7,6 +7,7 @@ function App() {
 
     const [response, setResponse] = useState<string>("")
     const [openHistorique, setOpenHistorique] = useState<boolean>(true)
+    const [posts, setPosts] = useState<Array<Object>>([])
 
     const livre = () => {
         fetch('http://localhost:3000/reddit')
