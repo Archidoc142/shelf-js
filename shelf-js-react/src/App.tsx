@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Historique from './Components/Historique';
 import Main from './Components/Main';
+import Post from './components/Post';
 
 function App() {
 
@@ -8,10 +9,10 @@ function App() {
     const [openHistorique, setOpenHistorique] = useState<boolean>(true)
 
     const livre = () => {
-        fetch('http://localhost:3000/api/data')
-            .then((response) => response.text())
-            .then((body) => {
-                setResponse(body)
+        fetch('http://localhost:3000/reddit')
+            .then((response) => response.json())
+            .then((json) => {
+                setPosts(json)
             });
     }
 
