@@ -14,7 +14,7 @@ function App() {
 
     return (
         <>
-            <button onClick={livre}>loupe</button>
+            <button className='text-white' onClick={livre}>loupe</button>
             {response}
         </>
     )
