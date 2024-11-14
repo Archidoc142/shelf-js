@@ -1,13 +1,17 @@
-import { useState } from 'react';
-import Post from './Post';
+interface Post {
+    title: string;
+    image: string;
+author: string
+}
+  
+import Post from '../components/Post';
 
-export default function Posts({posts} : {posts:Array<Object>}) {
-    
+export default function Posts({posts} : {posts: Array<Post>}) {
     return (
-        <>
-            {posts.map((post:any, i : number) => {
+        <div className='flex gap-1 flex-wrap'>
+            {posts.map((post: Post, i : number) => 
                 <Post post={post} key={i}/>
-            })}
-        </>
+            )}
+        </div>
     )
 }
