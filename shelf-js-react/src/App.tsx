@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Historique from './components/Historique';
-import Main from './components/Main';
+import Historique from './Components/Historique'
+import Main from './Components/Main'
 
 function App() {
 
