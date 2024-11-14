@@ -1,6 +1,21 @@
-export default function Search() {
+export default function Search({ setPosts } : {setPosts:React.Dispatch<React.SetStateAction<any>>}) {
+
+    const livre = () => {
+        fetch('http://localhost:3000/reddit')
+            .then((response) => response.json())
+            .then((json) => {
+                setPosts(json)
+                console.log(json)
+            });
+    }
+
+    const handleSubmit = (e : React.FormEvent) => {
+        e.preventDefault()
+    }
+
+
     return(
-        <form action="" className="w-full">
+        <form onSubmit={handleSubmit} className="w-full">
             <div className="bg-[#2e2e2e] rounded-full py-[12px] px-8 border-black border-2 flex gap-4 mb-4">
                 <input 
                     className="w-full bg-[#2e2e2e] outline-none"
