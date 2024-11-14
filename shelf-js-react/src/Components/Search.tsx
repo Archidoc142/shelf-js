@@ -1,4 +1,9 @@
+import React, { useEffect, useState } from 'react';
+
 export default function Search({ setPosts } : {setPosts:React.Dispatch<React.SetStateAction<any>>}) {
+
+    const [type, setType] = useState<string>('');
+    const [text, setText] = useState<string>('');
 
     const livre = () => {
         fetch('http://localhost:3000/reddit')
@@ -9,10 +14,9 @@ export default function Search({ setPosts } : {setPosts:React.Dispatch<React.Set
             });
     }
 
-    const handleSubmit = (e : React.FormEvent) => {
-        e.preventDefault()
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
     }
-
 
     return(
         <form onSubmit={handleSubmit} className="w-full">
@@ -21,6 +25,7 @@ export default function Search({ setPosts } : {setPosts:React.Dispatch<React.Set
                     className="w-full bg-[#2e2e2e] outline-none"
                     type="text"
                     placeholder="Que recherchez-vous?"
+                    onChange={(e) => setText(e.target.value)}
                 />
 
                 <button className="bg-[#666666] rounded-full p-2 group" type="submit">
@@ -29,16 +34,16 @@ export default function Search({ setPosts } : {setPosts:React.Dispatch<React.Set
             </div>
 
             <div className="flex gap-4">
-                <input type="radio" name="search" value="livre" required/>
+                <input type="radio" name="search" onChange={() => setType('livre')} required/>
                 <label htmlFor="livre">Livres</label>
 
-                <input type="radio" name="search" value="film" required/>
+                <input type="radio" name="search" onChange={() => setType('film')} required/>
                 <label htmlFor="film">Films</label>
 
-                <input type="radio" name="search" value="jeu" required/>
+                <input type="radio" name="search" onChange={() => setType('jeu')} required/>
                 <label htmlFor="jeu">Jeux Vidéo</label>
 
-                <input type="radio" name="search" value="musique" required/>
+                <input type="radio" name="search" onChange={() => setType('musique')} required/>
                 <label htmlFor="musique">Musique</label>
             </div>
         </form>
