@@ -15,6 +15,8 @@ export default function Posts({posts, type} : {posts:Array<Object>, type:string}
                     <Album post={post} key={i} /> : 
                 type == "musiques" ?
                     <Musique post={post} key={i} /> : 
+                type == "films" || type == "livres" ?
+                    <Post post={post} key={i} /> : 
                     null
             )}
         </div>
