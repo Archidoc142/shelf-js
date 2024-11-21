@@ -73,6 +73,31 @@ app.get("/livres", async (req, res) => {
   res.send(JSON.stringify(livres));
 })
 
+app.post("/delete", async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db("shelf_js");
+    const historique = db.collection("historique");
+
+    const query = { id: req.query.id };
+    const result = await historique.deleteOne(query);
+
+    if (result.deletedCount === 1) {
+      console.log("Supprimé 1 élément de l'historique.");
+    } else {
+      console.log("Aucun élément correspondant. Supprimé 1 élément de l'historique.");
+    }
+
+    res.send(JSON.stringify(results));
+  }
+  catch(e) {
+    console.log(e);
+  }
+  finally {
+    await client.close();
+  }
+})
+
 app.get("/historique", async (req, res) => {
   try {
     await client.connect();
