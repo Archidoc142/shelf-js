@@ -73,6 +73,24 @@ app.get("/livres", async (req, res) => {
   res.send(JSON.stringify(livres));
 })
 
+app.get("/historique", async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db("shelf_js");
+    const historique = db.collection("historique");
+
+    const find =  historique.find();
+
+    res.send(JSON.stringify(result));
+  }
+  catch(e) {
+    console.log(e);
+  }
+  finally {
+    await client.close();
+  }
+})
+
 app.get("/films", async (req, res) => {
 
   const films = [];
