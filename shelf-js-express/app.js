@@ -4,9 +4,40 @@ const port = 3000
 const jsdom = require("jsdom")
 const { JSDOM } = jsdom
 const fs = require('node:fs');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://itshichabk:guo6yzM0gZuxYiSx@cluster0.a5kas.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 var cors = require('cors');
 app.use(cors());
+
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+const insertToDB = async (req, type) => {
+  try {
+    await client.connect();
+    const db = client.db("shelf_js");
+    const historique = db.collection("historique");
+
+    const doc = {
+      text: req.query.search,
+      type: type
+    }
+
+    await historique.insertOne(doc);
+  }
+  catch(e) {
+    console.log(e);
+  }
+  finally {
+    await client.close();
+  }
+}
 
 app.get('/api/data', (req, res) => {
   res.send('Hello World!')
@@ -38,6 +69,7 @@ app.get("/livres", async (req, res) => {
     }
   }
 
+  await insertToDB(req, "livre");
   res.send(JSON.stringify(livres));
 })
 
@@ -66,32 +98,8 @@ app.get("/films", async (req, res) => {
     });
   }
 
+  await insertToDB(req, "film");
   res.send(JSON.stringify(films));
-})
-
-app.get("/reddit", async (req, res) => {
-    const reddit = await fetch("https://old.reddit.com/r/ProgrammerHumor");
-    const redditRes = await reddit.text();
-
-    const { document } = (new JSDOM(redditRes)).window;
-    
-    const posts = []
-    
-    const titles = document.querySelectorAll("a.title")
-
-    const images = document.querySelectorAll(".thumbnail img")
-    const authors = document.querySelectorAll(".entry .author") 
-
-    for(let i = 0; i < titles.length; i++)
-    {
-        posts.push({
-            title: titles[i].innerHTML,
-            image: images[i].src,
-            author: authors[i].innerHTML
-        })
-    }
-
-    res.send(JSON.stringify(posts));
 })
 
 app.get("/jeux", async (req, res) => {
@@ -115,6 +123,7 @@ app.get("/jeux", async (req, res) => {
         })
   }
 
+  await insertToDB(req, "jeu");
   res.send(JSON.stringify(posts));
 })
 
@@ -141,6 +150,7 @@ app.get("/albums", async (req, res) => {
         })
    }
 
+  await insertToDB(req, "album");
   res.send(JSON.stringify(posts));
 })
 
@@ -166,6 +176,7 @@ app.get("/musiques", async (req, res) => {
         })
     }
   
+    await insertToDB(req, "musique");
     res.send(JSON.stringify(posts));
 })
 
