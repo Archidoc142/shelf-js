@@ -80,8 +80,8 @@ app.post("/delete", async (req, res) => {
     const db = client.db("shelf_js");
     const historique = db.collection("historique");
 
-    const query = { id: req.query.id };
-    const result = await historique.deleteOne(query);
+    const query = { "text": req.query.text, "type": req.query.type };
+    const result = await historique.deleteMany(query);
 
     if (result.deletedCount === 1) {
       res.send(JSON.stringify("Supprimé 1 élément de l'historique."));
