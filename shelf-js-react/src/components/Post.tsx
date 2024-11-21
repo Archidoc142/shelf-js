@@ -1,7 +1,7 @@
 interface Post {
   title: string;
   image: string;
-  author: string
+  author: string;
 }
 
 export default function Post( {post} : {post: Post} ) {
