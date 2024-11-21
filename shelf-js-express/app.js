@@ -83,9 +83,9 @@ app.post("/delete", async (req, res) => {
     const result = await historique.deleteOne(query);
 
     if (result.deletedCount === 1) {
-      console.log("Supprimé 1 élément de l'historique.");
+      res.send(JSON.stringify("Supprimé 1 élément de l'historique."));
     } else {
-      console.log("Aucun élément correspondant. Supprimé 1 élément de l'historique.");
+      res.send(JSON.stringify("Aucun élément correspondant. Supprimé 1 élément de l'historique."));
     }
 
     res.send(JSON.stringify(results));
