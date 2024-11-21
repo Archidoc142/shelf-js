@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function Search({ setPosts, type, setType } : {setPosts:React.Dispatch<React.SetStateAction<any>>, type:string, setType:React.Dispatch<React.SetStateAction<any>>}) {
+export default function Search({ setPosts, type, setType, setHistorique, historique } : {setPosts:React.Dispatch<React.SetStateAction<any>>, type:string, setType:React.Dispatch<React.SetStateAction<any>>, setHistorique:React.Dispatch<React.SetStateAction<any>>, historique: Array<{nom: string; type: string}>}) {
 
     const [text, setText] = useState<string>('');
 
@@ -18,6 +18,7 @@ export default function Search({ setPosts, type, setType } : {setPosts:React.Dis
         e.preventDefault()
         removePosts()
         API()
+        checkHistorique()
     }
 
     const removePosts = () => {
@@ -28,6 +29,30 @@ export default function Search({ setPosts, type, setType } : {setPosts:React.Dis
         removePosts()
     }, [type])
 
+    const checkHistorique = () => {
+        let exist = false
+
+        for (let i = 0; i < historique.length; i++) {
+            if (historique[i].nom === text) {
+                exist = true
+                break
+            }
+        }
+
+        if (!exist) {
+            addToHistorique()
+        }
+    }
+
+    const addToHistorique = () => {
+        const newItem = { nom: text, type: type }
+        setHistorique((p:Array<Object>) => [...p, newItem])
+    }
+
+    useEffect(() => {
+        console.log(historique)
+    }, [historique])
+    
     return(
         <form onSubmit={handleSubmit} className="w-full">
             <div className="bg-[#2e2e2e] rounded-full py-[12px] px-8 border-black border-2 flex gap-4 mb-4">

@@ -3,7 +3,7 @@ import ButtonHistorique from "./ButtonHistorique";
 import Posts from "./Posts";
 import Search from "./Search";
 
-export default function Main({setOpen, open}: {setOpen: React.Dispatch<React.SetStateAction<any>>, open: boolean}) {
+export default function Main({setOpen, open, setHistorique, historique}: {setOpen: React.Dispatch<React.SetStateAction<any>>, open: boolean, setHistorique:React.Dispatch<React.SetStateAction<any>>, historique: Array<{nom: string; type: string}>}) {
 
     const [posts, setPosts] = useState<Array<Object>>([])
     const [type, setType] = useState<string>('');
@@ -14,8 +14,19 @@ export default function Main({setOpen, open}: {setOpen: React.Dispatch<React.Set
                 setOpen={setOpen}
                 open={open}
             />
-            <Search setPosts={setPosts} type={type} setType={setType} />
-            <Posts posts={posts} type={type} />
+            
+            <Search 
+                setPosts={setPosts} 
+                type={type} 
+                setType={setType} 
+                setHistorique={setHistorique}
+                historique={historique}
+            />
+
+            <Posts 
+                posts={posts} 
+                type={type} 
+            />
         </div>
     )
 }

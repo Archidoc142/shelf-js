@@ -3,7 +3,7 @@ import { useGSAP } from '@gsap/react';
 import HistoriqueItem from "./HistoriqueItem";
 import { useRef } from 'react';
 
-export default function Historique({open} : {open: boolean}) {
+export default function Historique({open, historique} : {open: boolean, historique: Array<Object>}) {
 
     const container = useRef(null)
 
@@ -23,10 +23,13 @@ export default function Historique({open} : {open: boolean}) {
 
             <h2 className="text-center font-bold my-4 text-xl">Historique</h2>
 
-            <HistoriqueItem nom="Rigeur" />
-            <HistoriqueItem nom="Genshin" />
-            <HistoriqueItem nom="Yo les amis c'est Squeezie" />
-            <HistoriqueItem nom="Cyprien vs Norman" />
+            {
+                historique.length > 0 ? 
+                    historique.map((h:any, i:number) => (
+                        <HistoriqueItem key={i} item={h} />
+                    ))
+                : null
+            }
         </div>
     )
 }

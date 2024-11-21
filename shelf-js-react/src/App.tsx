@@ -4,18 +4,21 @@ import Main from './Components/Main'
 
 function App() {
 
-    const [response, setResponse] = useState<string>("")
+    const [historique, setHistorique] = useState<Array<{nom: string; type: string}>>([])
     const [openHistorique, setOpenHistorique] = useState<boolean>(true)
 
     return (
         <div>
             <Historique 
                 open={openHistorique}
+                historique={historique}
             />
 
             <Main 
                 setOpen={setOpenHistorique}
                 open={openHistorique}
+                setHistorique={setHistorique}
+                historique={historique}
             />
         </div>
     )
