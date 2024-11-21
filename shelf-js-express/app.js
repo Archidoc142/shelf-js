@@ -29,7 +29,8 @@ const insertToDB = async (req, type) => {
       type: type
     }
 
-    await historique.insertOne(doc);
+    const result = await historique.insertOne(doc);
+    return result.insertedId;
   }
   catch(e) {
     console.log(e);
@@ -87,8 +88,6 @@ app.post("/delete", async (req, res) => {
     } else {
       res.send(JSON.stringify("Aucun élément correspondant. Supprimé 1 élément de l'historique."));
     }
-
-    res.send(JSON.stringify(results));
   }
   catch(e) {
     console.log(e);
@@ -146,8 +145,14 @@ app.get("/films", async (req, res) => {
     });
   }
 
-  await insertToDB(req, "film");
-  res.send(JSON.stringify(films));
+  const id = await insertToDB(req, "film");
+
+  const result = {
+    id: id,
+    data: films
+  }
+
+  res.send(JSON.stringify(result));
 })
 
 app.get("/jeux", async (req, res) => {
@@ -171,8 +176,14 @@ app.get("/jeux", async (req, res) => {
         })
   }
 
-  await insertToDB(req, "jeu");
-  res.send(JSON.stringify(posts));
+  const id = await insertToDB(req, "jeu");
+
+  const result = {
+    id: id,
+    data: posts
+  }
+
+  res.send(JSON.stringify(result));
 })
 
 app.get("/albums", async (req, res) => {
@@ -198,8 +209,14 @@ app.get("/albums", async (req, res) => {
         })
    }
 
-  await insertToDB(req, "album");
-  res.send(JSON.stringify(posts));
+   const id = await insertToDB(req, "album");
+
+   const result = {
+     id: id,
+     data: posts
+   }
+ 
+   res.send(JSON.stringify(result));
 })
 
 
@@ -224,8 +241,14 @@ app.get("/musiques", async (req, res) => {
         })
     }
   
-    await insertToDB(req, "musique");
-    res.send(JSON.stringify(posts));
+    const id = await insertToDB(req, "musique");
+
+    const result = {
+      id: id,
+      data: posts
+    }
+  
+    res.send(JSON.stringify(result));
 })
 
 
