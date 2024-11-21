@@ -1,14 +1,17 @@
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import HistoriqueItem from "./HistoriqueItem";
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import HistoriqueActions from './HistoriqueActions';
 
-export default function Historique({open, historique} : {open: boolean, historique: Array<Object>}) {
+export default function Historique({open, historique, setType, setPosts} : {open: boolean, historique: Array<Object>, setType: React.Dispatch<React.SetStateAction<any>>, setPosts:  React.Dispatch<React.SetStateAction<any>>}) {
 
     const container = useRef(null)
+    const [selectedItem, setSelectedItem] = useState<{id: number; nom: string; type: string}>({id: 0, nom: "", type: ""})
 
     const opening = gsap.to(container.current, { width: 240 })
     const closing = gsap.to(container.current, { width: 0 })
+
 
     useGSAP(() => {
         if (open) {
@@ -25,11 +28,13 @@ export default function Historique({open, historique} : {open: boolean, historiq
 
             {
                 historique.length > 0 ? 
-                    historique.map((h:any, i:number) => (
-                        <HistoriqueItem key={i} item={h} />
-                    ))
+                historique.map((h:any, i:number) => (
+                    <HistoriqueItem key={i} item={h} id={i + 1} setSelectedItem={setSelectedItem} setType={setType} />
+                ))
                 : null
             }
+
+            <HistoriqueActions selectedItem={selectedItem} setPosts={setPosts} />
         </div>
     )
 }

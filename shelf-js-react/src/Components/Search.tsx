@@ -9,8 +9,6 @@ export default function Search({ setPosts, type, setType, setHistorique, histori
             .then((response) => response.json())
             .then((json) => {
                 setPosts(json)
-                console.log(json)
-                console.log(type)
             });
     }
 
@@ -33,7 +31,7 @@ export default function Search({ setPosts, type, setType, setHistorique, histori
         let exist = false
 
         for (let i = 0; i < historique.length; i++) {
-            if (historique[i].nom === text) {
+            if (historique[i].nom === text && historique[i].type === type) {
                 exist = true
                 break
             }
@@ -49,10 +47,6 @@ export default function Search({ setPosts, type, setType, setHistorique, histori
         setHistorique((p:Array<Object>) => [...p, newItem])
     }
 
-    useEffect(() => {
-        console.log(historique)
-    }, [historique])
-    
     return(
         <form onSubmit={handleSubmit} className="w-full">
             <div className="bg-[#2e2e2e] rounded-full py-[12px] px-8 border-black border-2 flex gap-4 mb-4">
