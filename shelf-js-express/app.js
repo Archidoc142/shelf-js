@@ -79,9 +79,14 @@ app.get("/historique", async (req, res) => {
     const db = client.db("shelf_js");
     const historique = db.collection("historique");
 
-    const find =  historique.find();
+    const cursor =  historique.find();
+    let results = []
 
-    res.send(JSON.stringify(result));
+    for await(const doc of cursor) {
+      results.push(doc);
+    }
+
+    res.send(JSON.stringify(results));
   }
   catch(e) {
     console.log(e);
