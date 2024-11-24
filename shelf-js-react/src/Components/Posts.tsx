@@ -5,7 +5,7 @@ import Album from './Album';
 import Musique from './Musique';
 
 export default function Posts({posts, type} : {posts:Array<Object>, type:string}) {
-    
+
     return (
         <div className='mt-8 justify-center flex flex-wrap w-full gap-2 text-center'>
             {posts.map((post:any, i : number) => 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Historique from './Components/Historique'
 import Main from './Components/Main'
 
@@ -8,6 +8,17 @@ function App() {
     const [openHistorique, setOpenHistorique] = useState<boolean>(true)
     const [posts, setPosts] = useState<Array<Object>>([])
     const [type, setType] = useState<string>('');
+
+    useEffect(() => {
+        fetch('http://localhost:3000/historique')
+        .then((response) => response.json())
+        .then((json) => {
+            for (let i = 0; i < json.length; i++) {
+                const newItem = { nom: json[i].text, type: json[i].type }
+                setHistorique((p:Array<any>) => [...p, newItem])
+            }
+        });
+    }, [])
 
     return (
         <div>

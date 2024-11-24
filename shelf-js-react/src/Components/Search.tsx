@@ -8,7 +8,7 @@ export default function Search({ setPosts, type, setType, setHistorique, histori
         fetch('http://localhost:3000/' + type + "?search=" + text)
             .then((response) => response.json())
             .then((json) => {
-                setPosts(json)
+                setPosts(json.data)
             });
     }
 

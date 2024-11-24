@@ -1,5 +1,4 @@
 interface HistoriqueItem {
-    url : string;
     type: string;
     nom : string;
 }
