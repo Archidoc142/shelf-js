@@ -13,7 +13,7 @@ export default function HistoriqueItem({item, id, setSelectedItem, setType} : {i
     }
     
     return (
-        <div className="bg-[#212121] px-4 py-2 m-2 rounded-[10px] flex items-center justify-between gap-4 relative">
+        <div id={id.toString()} className="bg-[#212121] px-4 py-2 m-2 rounded-[10px] flex items-center justify-between gap-4 relative">
             <p className="text-nowrap overflow-hidden">{item.nom} - {item.type}</p>
 
             <button className="group" onClick={handleClick}>

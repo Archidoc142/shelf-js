@@ -70,7 +70,7 @@ app.get("/livres", async (req, res) => {
     }
   }
 
-  await insertToDB(req, "livre");
+  await insertToDB(req, "livres");
   res.send(JSON.stringify(livres));
 })
 
@@ -145,7 +145,7 @@ app.get("/films", async (req, res) => {
     });
   }
 
-  const id = await insertToDB(req, "film");
+  const id = await insertToDB(req, "films");
 
   const result = {
     id: id,
@@ -176,7 +176,7 @@ app.get("/jeux", async (req, res) => {
         })
   }
 
-  const id = await insertToDB(req, "jeu");
+  const id = await insertToDB(req, "jeux");
 
   const result = {
     id: id,
@@ -209,7 +209,7 @@ app.get("/albums", async (req, res) => {
         })
    }
 
-   const id = await insertToDB(req, "album");
+   const id = await insertToDB(req, "albums");
 
    const result = {
      id: id,
@@ -241,7 +241,7 @@ app.get("/musiques", async (req, res) => {
         })
     }
   
-    const id = await insertToDB(req, "musique");
+    const id = await insertToDB(req, "musiques");
 
     const result = {
       id: id,

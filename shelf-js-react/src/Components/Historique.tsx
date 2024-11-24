@@ -34,7 +34,11 @@ export default function Historique({open, historique, setType, setPosts} : {open
                 : null
             }
 
-            <HistoriqueActions selectedItem={selectedItem} setPosts={setPosts} />
+            <HistoriqueActions 
+                selectedItem={selectedItem} 
+                setPosts={setPosts} 
+                setSelectedItem={setSelectedItem} 
+            />
         </div>
     )
 }
