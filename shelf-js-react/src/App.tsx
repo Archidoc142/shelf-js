@@ -10,7 +10,7 @@ function App() {
     const [type, setType] = useState<string>('');
 
     useEffect(() => {
-        fetch('http://localhost:3000/historique')
+        fetch('https://shelf-js.onrender.com/historique')
         .then((response) => response.json())
         .then((json) => {
             for (let i = 0; i < json.length; i++) {

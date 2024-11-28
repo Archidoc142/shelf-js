@@ -5,7 +5,7 @@ export default function Search({ setPosts, type, setType, setHistorique, histori
     const [text, setText] = useState<string>('');
 
     const API = () => {
-        fetch('http://localhost:3000/' + type + "?search=" + text)
+        fetch('https://shelf-js.onrender.com/' + type + "?search=" + text)
             .then((response) => response.json())
             .then((json) => {
                 setPosts(json.data)
