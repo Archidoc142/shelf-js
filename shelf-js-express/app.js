@@ -53,7 +53,7 @@ app.get("/livres", async (req, res) => {
   const livres = [];
   const url = "https://www.renaud-bray.com/Recherche.aspx?langue=fr&words=" + req.query.search + "&wbgc_iNo=1906&type=1&root=1906&supersection=2&pSize=25";
 
-  const rbFetch = await fetch(url, {dispatcher: new Agent({connectTimeout: 30000})});
+  const rbFetch = await fetch(url, {dispatcher: new Agent({connectTimeout: 180000})});
   const rbRes = await rbFetch.text();
 
   const { document } = (new JSDOM(rbRes)).window;
