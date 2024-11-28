@@ -6,7 +6,7 @@ const { JSDOM } = jsdom
 const fs = require('node:fs');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://itshichabk:guo6yzM0gZuxYiSx@cluster0.a5kas.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-import { Agent } from "undici";
+const { Agent } = require('undici');
 
 var cors = require('cors');
 app.use(cors());
