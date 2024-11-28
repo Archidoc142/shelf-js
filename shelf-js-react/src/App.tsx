@@ -10,6 +10,7 @@ function App() {
     const [type, setType] = useState<string>('');
 
     useEffect(() => {
+        console.log("EFFECT")
         fetch('http://localhost:3000/historique')
         .then((response) => response.json())
         .then((json) => {

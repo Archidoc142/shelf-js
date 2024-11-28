@@ -9,13 +9,19 @@ export default function HistoriqueActions({ selectedItem, setPosts, setSelectedI
     }
 
     const deleteInBD = () => {
-        const formData = new FormData();
+        /*const formData = new FormData();
         formData.append('type', selectedItem.type)
-        formData.append('text', selectedItem.nom)
+        formData.append('text', selectedItem.nom)*/
+
+        const formData = {
+            "type": selectedItem.type,
+            "text": selectedItem.nom
+        }
 
         fetch('http://localhost:3000/delete' , {
             method: 'POST',
-            body: formData
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(formData)
         }).then(response => response.json())
 
         const toDelete = document.getElementById(selectedItem.id.toString())

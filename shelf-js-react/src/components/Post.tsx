@@ -6,10 +6,10 @@ interface Post {
 
 export default function Post( {post} : {post: Post} ) {
   return (
-    <div className="text-white w-36 h-72 bg-gray-700">
-        <h1 className="text-lg">{post.title}</h1>
-        <p className="text-sm">by {post.author}</p>
-        <img height={64} src={post.image} alt={post.title} />
-    </div>
+    <div className="text-white max-w-60">
+      <img className="h-80 mx-auto" src={post.image} alt={post.title} />
+      <h1 className="text-lg font-bold mt-2">{post.title}</h1>
+      <h2 className="mt-2">{post.author}</h2>
+  </div>
   )
 }

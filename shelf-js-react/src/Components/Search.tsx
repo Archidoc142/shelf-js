@@ -9,6 +9,7 @@ export default function Search({ setPosts, type, setType, setHistorique, histori
             .then((response) => response.json())
             .then((json) => {
                 setPosts(json.data)
+                console.log(json.data)
             });
     }
 

@@ -10,6 +10,9 @@ const uri = "mongodb+srv://itshichabk:guo6yzM0gZuxYiSx@cluster0.a5kas.mongodb.ne
 var cors = require('cors');
 app.use(cors());
 
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.json());
+
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -70,8 +73,14 @@ app.get("/livres", async (req, res) => {
     }
   }
 
-  await insertToDB(req, "livres");
-  res.send(JSON.stringify(livres));
+  const id = await insertToDB(req, "livres");
+
+  result = {
+    id: id,
+    data: livres
+  }
+  
+  res.send(JSON.stringify(result));
 })
 
 app.post("/delete", async (req, res) => {
@@ -80,13 +89,15 @@ app.post("/delete", async (req, res) => {
     const db = client.db("shelf_js");
     const historique = db.collection("historique");
 
-    const query = { "text": req.query.text, "type": req.query.type };
+    const query = { "text": req.body.text, "type": req.body.type };
     const result = await historique.deleteMany(query);
 
-    if (result.deletedCount === 1) {
+    console.log(result)
+
+    if (result.deletedCount > 0) {
       res.send(JSON.stringify("Supprimé 1 élément de l'historique."));
     } else {
-      res.send(JSON.stringify("Aucun élément correspondant. Supprimé 1 élément de l'historique."));
+      res.send(JSON.stringify("Aucun élément correspondant. Supprimé 0 élément de l'historique."));
     }
   }
   catch(e) {
