@@ -1,7 +1,7 @@
 export default function HistoriqueActions({ selectedItem, setPosts, setSelectedItem }: { selectedItem: { id: number; nom: string; type: string}, setPosts: React.Dispatch<React.SetStateAction<any>>, setSelectedItem: React.Dispatch<React.SetStateAction<any>> }) {
 
     const consulter = () => {
-        fetch('http://localhost:3000/' + selectedItem.type + "?search=" + selectedItem.nom)
+        fetch('https://shelf-js.onrender.com/' + selectedItem.type + "?search=" + selectedItem.nom)
             .then((response) => response.json())
             .then((json) => {
                 setPosts(json.data)
@@ -18,7 +18,7 @@ export default function HistoriqueActions({ selectedItem, setPosts, setSelectedI
             "text": selectedItem.nom
         }
 
-        fetch('http://localhost:3000/delete' , {
+        fetch('https://shelf-js.onrender.com/delete' , {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(formData)

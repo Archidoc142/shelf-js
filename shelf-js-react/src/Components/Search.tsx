@@ -5,7 +5,7 @@ export default function Search({ setPosts, type, setType, setHistorique, histori
     const [text, setText] = useState<string>('');
 
     const API = () => {
-        fetch('http://localhost:3000/' + type + "?search=" + text)
+        fetch('https://shelf-js.onrender.com/' + type + "?search=" + text)
             .then((response) => response.json())
             .then((json) => {
                 setPosts(json.data)
@@ -15,9 +15,12 @@ export default function Search({ setPosts, type, setType, setHistorique, histori
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        removePosts()
-        API()
-        checkHistorique()
+
+        if (text.length > 0) {
+            removePosts()
+            API()
+            checkHistorique()
+        }
     }
 
     const removePosts = () => {
