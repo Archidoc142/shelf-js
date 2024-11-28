@@ -6,6 +6,7 @@ const { JSDOM } = jsdom
 const fs = require('node:fs');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://itshichabk:guo6yzM0gZuxYiSx@cluster0.a5kas.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+import { Agent } from "undici";
 
 var cors = require('cors');
 app.use(cors());
@@ -52,7 +53,7 @@ app.get("/livres", async (req, res) => {
   const livres = [];
   const url = "https://www.renaud-bray.com/Recherche.aspx?langue=fr&words=" + req.query.search + "&wbgc_iNo=1906&type=1&root=1906&supersection=2&pSize=25";
 
-  const rbFetch = await fetch(url, {signal: AbortSignal.timeout( 30000 ),});
+  const rbFetch = await fetch(url, {dispatcher: new Agent({connectTimeout: 30})});
   const rbRes = await rbFetch.text();
 
   const { document } = (new JSDOM(rbRes)).window;
