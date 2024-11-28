@@ -14,9 +14,12 @@ export default function Search({ setPosts, type, setType, setHistorique, histori
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        removePosts()
-        API()
-        checkHistorique()
+
+        if (text.length > 0) {
+            removePosts()
+            API()
+            checkHistorique()
+        }
     }
 
     const removePosts = () => {

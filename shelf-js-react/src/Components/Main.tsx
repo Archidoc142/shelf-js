@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ButtonHistorique from "./ButtonHistorique";
 import Posts from "./Posts";
 import Search from "./Search";

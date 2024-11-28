@@ -9,15 +9,18 @@ export default function Historique({open, historique, setType, setPosts} : {open
     const container = useRef(null)
     const [selectedItem, setSelectedItem] = useState<{id: number; nom: string; type: string}>({id: 0, nom: "", type: ""})
 
-    const opening = gsap.to(container.current, { width: 240 })
-    const closing = gsap.to(container.current, { width: 0 })
-
-
     useGSAP(() => {
         if (open) {
-            opening.play()
+            gsap.to(container.current, { 
+                width: "auto",
+                duration: 1,
+                ease: "back.out"
+            });
+
         } else {
-            closing.play()
+            gsap.to(container.current, {
+                width:0,
+            })
         }
     }, [open])
 
